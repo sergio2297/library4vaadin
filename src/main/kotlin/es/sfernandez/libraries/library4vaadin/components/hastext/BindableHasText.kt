@@ -1,32 +1,24 @@
-package es.sfernandez.library4vaadin.components
+package es.sfernandez.libraries.library4vaadin.components.hastext
 
-import com.vaadin.flow.component.Component
-import com.vaadin.flow.component.Composite
 import com.vaadin.flow.component.HasText
 import com.vaadin.flow.component.HasValue
 import com.vaadin.flow.component.HasValue.ValueChangeEvent
 import com.vaadin.flow.shared.Registration
 
-sealed class BindableHasText<COMPONENT>
-    : Composite<COMPONENT>, HasValue<ValueChangeEvent<String>, String>
-    where COMPONENT : HasText,
-          COMPONENT : Component
+/**
+ * Makes a [HasText] bindable by assigning values as element text
+ */
+interface BindableHasText
+    : HasText, HasValue<ValueChangeEvent<String>, String>
 {
-
-    //---- Constructor ----
-    constructor() : this("")
-
-    constructor(text: String) : super() {
-        value = text
-    }
 
     //---- Methods ----
     override fun setValue(value: String?) {
-        content.text = value
+        text = value
     }
 
     override fun getValue(): String {
-        return content.text
+        return text
     }
 
     /**
